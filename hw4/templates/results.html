@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head><title>Art relevant to {{ term }}</title></head>
+<body>
+  <h1>Art relevant to {{ term }}</h1>
+  <ul>
+  {% for art in artworks %}
+  {# AI-written: takes an artwork and shows its title, artist, and date, with a fallback for each if missing #}
+    <strong>{{ art.title | default("Untitled", true) }}</strong><br>
+    {{ art.artist_display | default("Unknown artist", true) }}<br>
+    {{ art.date_display | default("Date unknown", true) }}
+    {% endfor %}
+  </ul>
+  <a href="/">New search</a>
+</body>
+</html>
