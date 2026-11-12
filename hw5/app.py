@@ -18,9 +18,12 @@ def results():
         return render_template("home.html", message="No search term entered.")
     try:
         artworks = get_artworks(artist)
-    except (requests.RequestException, ValueError) as e:
+    except (requests.RequestException, ValueError):
         app.logger.exception("Artwork lookup failed for %r", artist)
-        return render_template("home.html", message=f"Something broke the request: {e}")
+        return render_template(
+            "home.html",
+            message="Sorry, we couldn't reach the art museum's service. Please try again.",
+        ), 502
     return render_template("results.html", artist=artist, artworks=artworks)
 
 
